@@ -1,10 +1,13 @@
+from django.core.urlresolvers import resolve
 from django.test import TestCase
+from lists.views import index
 
 # Create your tests here.
 
-class SmokeTest(TestCase):
+class IndexTest(TestCase):
 
-    def test_bad_maths(self):
+    def test_root_url_resolves_to_index_view(self):
 
-        self.assertEqual(1 + 1, 3)
+        found = resolve('/')
 
+        self.assertEqual(found.func, index)

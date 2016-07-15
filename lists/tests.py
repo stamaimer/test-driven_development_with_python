@@ -1,3 +1,4 @@
+from django.template.loader import render_to_string
 from django.core.urlresolvers import resolve
 from django.http import HttpRequest
 from django.test import TestCase
@@ -18,9 +19,7 @@ class IndexTest(TestCase):
         request = HttpRequest()
 
         response = index(request)
+        
+        excepted_html = render_to_string("index.html")
 
-        self.assertTrue(response.content.startswith(b"<html>"))
-
-        self.assertIn(b"<title>To-Do lists</title>", response.content)
-
-        self.assertTrue(response.content.endswith(b"</html>"))
+        self.assertEqual(response.content.decode(), excepted_html)

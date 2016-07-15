@@ -1,4 +1,5 @@
 from django.core.urlresolvers import resolve
+from django.http import HttpRequest
 from django.test import TestCase
 from lists.views import index
 
@@ -11,3 +12,15 @@ class IndexTest(TestCase):
         found = resolve('/')
 
         self.assertEqual(found.func, index)
+
+    def test_index_returns_correct_html(self):
+
+        request = HttpRequest()
+
+        response = index(request)
+
+        self.assertTrue(response.content.startswith(b"<html>"))
+
+        self.assertIn(b"<title>To-Do lists</title>", response.content)
+
+        self.assertTrue(response.content.endswith(b"</html>"))

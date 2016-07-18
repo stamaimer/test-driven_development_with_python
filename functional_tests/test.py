@@ -75,7 +75,7 @@ class NewVisitorTest(LiveServerTestCase):
 
         inputbox = self.browser.find_element_by_id("id_new_item")
 
-        inputbox.send_keys("Buy mild")
+        inputbox.send_keys("Buy milk")
 
         inputbox.send_keys(Keys.ENTER)
 
